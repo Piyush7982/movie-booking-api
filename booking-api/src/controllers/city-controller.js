@@ -1,17 +1,16 @@
 const { INTEGER } = require("sequelize")
 const {CityService}= require("../services")
+const {SuccessResponse,ErrorResponse}= require("../utils/common")
 
 async function cityCreate(req,res){
     try {
         const response= await CityService.cityService.create({cityName:req.body.cityName})
-        res.json({
-            status:"success",
-            error:"",
-            city:response,
-            comment:"succesfully created"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully created"
+        res.json(SuccessResponse)
         
     } catch (error) {
+        
         res.json({
             status:"failed",
             error:"",
@@ -24,12 +23,9 @@ async function cityCreate(req,res){
 async function cityRemove(req,res){
     try {
         const response= await CityService.cityService.remove({cityName:req.body.cityName})
-        res.json({
-            status:"success",
-            error:"",
-            city:response,
-            comment:"succesfully removed"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully removed"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -45,12 +41,9 @@ async function cityRemove(req,res){
 async function cityUpdate(req,res){
     try {
         const response= await CityService.cityService.update({cityName:req.body.cityName},{id:req.body.id})
-        res.json({
-            status:"success",
-            error:"",
-            city:response,
-            comment:"succesfully updated"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully updated"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -65,12 +58,9 @@ async function cityUpdate(req,res){
 async function cityFindAll(req,res){
     try {
         const response= await CityService.cityService.findAll()
-        res.json({
-            status:"success",
-            error:"",
-            city:response,
-            comment:"succesfully found all"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully found all"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -88,12 +78,9 @@ async function cityFind(req,res){
         id=parseInt(req.params.id)
         
         const response= await CityService.cityService.find(id)
-        res.json({
-            status:"success",
-            error:"",
-            city:response,
-            comment:"succesfully found "
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully found"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({

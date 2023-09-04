@@ -1,16 +1,14 @@
 const { INTEGER } = require("sequelize")
 const {TheatreService}= require("../services")
 const {city} = require("../models")
+const {SuccessResponse,ErrorResponse}= require("../utils/common")
 async function theatreCreate(req,res){
     try {
         
         const response= await TheatreService.theatreService.create({theatreName:req.body.theatreName,cityId:req.body.cityId,totalSeat:req.body.totalSeat})
-        res.json({
-            status:"success",
-            error:"",
-            theatre:response,
-            comment:"succesfully created"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully created"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -25,12 +23,9 @@ async function theatreCreate(req,res){
 async function theatreRemove(req,res){
     try {
         const response= await TheatreService.theatreService.remove({theatreName:req.body.theatreName})
-        res.json({
-            status:"success",
-            error:"",
-            theatre:response,
-            comment:"succesfully removed"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully removed"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -46,12 +41,9 @@ async function theatreRemove(req,res){
 async function theatreUpdate(req,res){
     try {
         const response= await TheatreService.theatreService.update({theatreName:req.body.theatreName},{id:req.body.id})
-        res.json({
-            status:"success",
-            error:"",
-            theatre:response,
-            comment:"succesfully updated"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully updated"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -66,12 +58,9 @@ async function theatreUpdate(req,res){
 async function theatreFindAll(req,res){
     try {
         const response= await TheatreService.theatreService.findAll()
-        res.json({
-            status:"success",
-            error:"",
-            theatre:response,
-            comment:"succesfully found all"
-        })
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully found all"
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -91,13 +80,14 @@ async function theatreFind(req,res){
         const response= await TheatreService.theatreService.find(id)
         const state= await city.findByPk(id)
         // response.state=state.cityName
-        res.json({
-            status:"success",
-            error:"",
-            theatre:response,
-            state:state.cityName,
-            comment:"succesfully found "
-        })
+       
+        
+        SuccessResponse.Data=response
+        // Object.assign(SuccessResponse.Data,{state:state.cityName})
+        // SuccessResponse.Data.state=state.cityName
+        SuccessResponse.Message="succesfully found"
+        SuccessResponse.state=state.cityName
+        res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
