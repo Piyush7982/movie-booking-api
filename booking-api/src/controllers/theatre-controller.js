@@ -1,13 +1,14 @@
 const { INTEGER } = require("sequelize")
-const {CityService}= require("../services")
-
-async function cityCreate(req,res){
+const {TheatreService}= require("../services")
+const {city} = require("../models")
+async function theatreCreate(req,res){
     try {
-        const response= await CityService.cityService.create({cityName:req.body.cityName})
+        
+        const response= await TheatreService.theatreService.create({theatreName:req.body.theatreName,cityId:req.body.cityId,totalSeat:req.body.totalSeat})
         res.json({
             status:"success",
             error:"",
-            city:response,
+            theatre:response,
             comment:"succesfully created"
         })
         
@@ -15,19 +16,19 @@ async function cityCreate(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  create city",
+            comment:"failed to  create theatre",
             
         })
         throw error
     }
 }
-async function cityRemove(req,res){
+async function theatreRemove(req,res){
     try {
-        const response= await CityService.cityService.remove({cityName:req.body.cityName})
+        const response= await TheatreService.theatreService.remove({theatreName:req.body.theatreName})
         res.json({
             status:"success",
             error:"",
-            city:response,
+            theatre:response,
             comment:"succesfully removed"
         })
         
@@ -35,20 +36,20 @@ async function cityRemove(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  delete city",
+            comment:"failed to  delete theatre",
             
         })
         throw error
     }
 }
 
-async function cityUpdate(req,res){
+async function theatreUpdate(req,res){
     try {
-        const response= await CityService.cityService.update({cityName:req.body.cityName},{id:req.body.id})
+        const response= await TheatreService.theatreService.update({theatreName:req.body.theatreName},{id:req.body.id})
         res.json({
             status:"success",
             error:"",
-            city:response,
+            theatre:response,
             comment:"succesfully updated"
         })
         
@@ -56,19 +57,19 @@ async function cityUpdate(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  update city",
+            comment:"failed to  update theatre",
             
         })
         throw error
     }
 }
-async function cityFindAll(req,res){
+async function theatreFindAll(req,res){
     try {
-        const response= await CityService.cityService.findAll()
+        const response= await TheatreService.theatreService.findAll()
         res.json({
             status:"success",
             error:"",
-            city:response,
+            theatre:response,
             comment:"succesfully found all"
         })
         
@@ -76,22 +77,25 @@ async function cityFindAll(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  find all cities",
+            comment:"failed to  find all theatres",
             
         })
         throw error
     }
 }
 
-async function cityFind(req,res){
+async function theatreFind(req,res){
     try {
         id=parseInt(req.params.id)
         
-        const response= await CityService.cityService.find(id)
+        const response= await TheatreService.theatreService.find(id)
+        const state= await city.findByPk(id)
+        // response.state=state.cityName
         res.json({
             status:"success",
             error:"",
-            city:response,
+            theatre:response,
+            state:state.cityName,
             comment:"succesfully found "
         })
         
@@ -99,7 +103,7 @@ async function cityFind(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  find  city",
+            comment:"failed to  find  theatre",
             
         })
         throw error
@@ -107,5 +111,5 @@ async function cityFind(req,res){
 }
 
 module.exports={
-    cityController:{cityCreate,cityRemove,cityUpdate,cityFind,cityFindAll}
+    theatreController:{theatreCreate,theatreRemove,theatreUpdate,theatreFind,theatreFindAll}
 }
