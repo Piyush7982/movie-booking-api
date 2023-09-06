@@ -1,4 +1,5 @@
-
+const customError= require("../utils/errors") 
+const {StatusCodes}= require("http-status-codes")
 
 class crud{
     constructor(model){
@@ -7,17 +8,20 @@ class crud{
     async create(data){
         try {
             const response= await this.model.create(data)
+           
             return response
         } catch (error) {
-            throw error
+           throw new customError(error.message,StatusCodes.NOT_IMPLEMENTED)
+            
         }
+        
     }
     async remove(data){
         try {
             const response= await this.model.destroy({where:{data}})
             return response
         } catch (error) {
-            throw error
+            throw new customError(error.message,StatusCodes.NOT_IMPLEMENTED)
         }
     }
     async update(newData,searchData){
@@ -25,7 +29,7 @@ class crud{
             const response= await this.model.update(newData, {where: searchData})
             return response
         } catch (error) {
-            throw error
+            throw new customError(error.message,StatusCodes.NOT_MODIFIED)
         }
     }
     async findAll(){
@@ -33,7 +37,7 @@ class crud{
             const response= await this.model.findAll()
             return response
         } catch (error) {
-            throw error
+            throw new customError(error.message,StatusCodes.NOT_FOUND)
         }
     }
     async find(id){
@@ -41,7 +45,7 @@ class crud{
             const response= await this.model.findByPk(id)
             return response
         } catch (error) {
-            throw error
+            throw new customError(error.message,StatusCodes.NOT_FOUND)
         }
     }
 

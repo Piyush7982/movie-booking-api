@@ -1,5 +1,7 @@
 const express= require("express")
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
+const CustomError = require("../utils/errors")
+const { StatusCodes } = require("http-status-codes")
 const router= express.Router()
 router.get("/",(req,res)=>{
    
@@ -15,7 +17,7 @@ router.get("/",(req,res)=>{
         res.json({
             ErrorResponse
         })
-        throw error
+        throw new CustomError(error.message,StatusCodes.BAD_REQUEST)
     }
    
 })
