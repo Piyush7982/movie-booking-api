@@ -10,11 +10,11 @@ app.get("/",(req,res)=>{
     res.send("Hello")
 })
 app.use("/api",router)
-//contiune from here make array of keys and check for notnull attributes and maek middleware for them
 
 app.listen(3000,()=>{
     console.log("server started")
 })
+
 
 
 

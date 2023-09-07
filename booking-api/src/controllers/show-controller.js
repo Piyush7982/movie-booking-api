@@ -1,10 +1,10 @@
 const { INTEGER } = require("sequelize")
-const {MovieService}= require("../services")
+const {ShowService}= require("../services")
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
 
-async function movieCreate(req,res){
+async function showCreate(req,res){
     try {
-        const response= await MovieService.movieService.create({movieName:req.body.movieName,language:req.body.language})
+        const response= await ShowService.showService.create({movieId:req.body.movieId,theaterId:req.body.theaterId,costEach:req.body.costEach})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully created"
         return res.json(SuccessResponse)
@@ -14,15 +14,15 @@ async function movieCreate(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  create movie",
+            comment:"failed to  create show",
             
         })
         throw error
     }
 }
-async function movieRemove(req,res){
+async function showRemove(req,res){
     try {
-        const response= await MovieService.movieService.remove({movieName:req.body.movieName})
+        const response= await ShowService.showService.remove({movieId:req.body.movieId})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully removed"
         return res.json(SuccessResponse)
@@ -31,16 +31,16 @@ async function movieRemove(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  delete movie",
+            comment:"failed to  delete show",
             
         })
         throw error
     }
 }
 
-async function movieUpdate(req,res){
+async function showUpdate(req,res){
     try {
-        const response= await MovieService.movieService.update({movieName:req.body.movieName},{id:req.body.id})
+        const response= await ShowService.showService.update({movieId:req.body.movieId},{id:req.body.id})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully updated"
         return res.json(SuccessResponse)
@@ -49,15 +49,17 @@ async function movieUpdate(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  update movie",
+            comment:"failed to  update show",
             
         })
         throw error
     }
 }
-async function movieFindAll(req,res){
+async function showFindAll(req,res){
     try {
-        const response= await MovieService.movieService.findAll()
+        console.log(req.query)
+       
+        const response=(req.query)?await ShowService.showService.findAllSort(req.query):await ShowService.showService.findAll()
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully found all"
         return res.json(SuccessResponse)
@@ -66,18 +68,18 @@ async function movieFindAll(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  find all movies",
+            comment:"failed to  find all show",
             
         })
         throw error
     }
 }
 
-async function movieFind(req,res){
+async function showFind(req,res){
     try {
         id=parseInt(req.params.id)
         
-        const response= await MovieService.movieService.find(id)
+        const response= await ShowService.showService.find(id)
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully found"
         return res.json(SuccessResponse)
@@ -86,13 +88,14 @@ async function movieFind(req,res){
         res.json({
             status:"failed",
             error:"",
-            comment:"failed to  find  movie",
+            comment:"failed to  find  show",
             
         })
         throw error
     }
 }
 
+
 module.exports={
-    movieController:{movieCreate,movieRemove,movieUpdate,movieFind,movieFindAll}
+    showController:{showCreate,showRemove,showUpdate,showFind,showFindAll}
 }

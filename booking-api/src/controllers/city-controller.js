@@ -7,7 +7,7 @@ async function cityCreate(req,res){
         const response= await CityService.cityService.create({cityName:req.body.cityName})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully created"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         
@@ -25,7 +25,7 @@ async function cityRemove(req,res){
         const response= await CityService.cityService.remove({cityName:req.body.cityName})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully removed"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -43,7 +43,7 @@ async function cityUpdate(req,res){
         const response= await CityService.cityService.update({cityName:req.body.cityName},{id:req.body.id})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully updated"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -60,7 +60,7 @@ async function cityFindAll(req,res){
         const response= await CityService.cityService.findAll()
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully found all"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -80,7 +80,7 @@ async function cityFind(req,res){
         const response= await CityService.cityService.find(id)
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully found"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({

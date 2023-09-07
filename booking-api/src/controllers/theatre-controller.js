@@ -1,6 +1,6 @@
 const { INTEGER } = require("sequelize")
 const {TheatreService}= require("../services")
-const {city} = require("../models")
+
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
 async function theatreCreate(req,res){
     try {
@@ -8,7 +8,7 @@ async function theatreCreate(req,res){
         const response= await TheatreService.theatreService.create({theatreName:req.body.theatreName,cityId:req.body.cityId,totalSeat:req.body.totalSeat})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully created"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -25,7 +25,7 @@ async function theatreRemove(req,res){
         const response= await TheatreService.theatreService.remove({theatreName:req.body.theatreName})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully removed"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -43,7 +43,7 @@ async function theatreUpdate(req,res){
         const response= await TheatreService.theatreService.update({theatreName:req.body.theatreName},{id:req.body.id})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully updated"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -60,7 +60,7 @@ async function theatreFindAll(req,res){
         const response= await TheatreService.theatreService.findAll()
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully found all"
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({
@@ -78,16 +78,9 @@ async function theatreFind(req,res){
         id=parseInt(req.params.id)
         
         const response= await TheatreService.theatreService.find(id)
-        const state= await city.findByPk(id)
-        // response.state=state.cityName
-       
-        
-        SuccessResponse.Data=response
-        // Object.assign(SuccessResponse.Data,{state:state.cityName})
-        // SuccessResponse.Data.state=state.cityName
+        SuccessResponse.Data=response      
         SuccessResponse.Message="succesfully found"
-        SuccessResponse.state=state.cityName
-        res.json(SuccessResponse)
+        return res.json(SuccessResponse)
         
     } catch (error) {
         res.json({

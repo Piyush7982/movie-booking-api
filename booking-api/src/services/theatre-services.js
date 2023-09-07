@@ -32,7 +32,7 @@ async function update(newData,searchData){
 async function find(id){
     const theatre = new TheatreRepository()
     try {
-        const response= await theatre.find(id)
+        const response= await theatre.getone(id)
         return response
     } catch (error) {
         throw error
@@ -42,7 +42,9 @@ async function find(id){
 async function findAll(){
     const theatre = new TheatreRepository()
     try {
-        const response= await theatre.findAll()
+        
+    
+        const response= await theatre.getComplete()
         return response
     } catch (error) {
         throw error

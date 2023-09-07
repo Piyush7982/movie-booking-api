@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.city,
         {foreignKey:'cityId'})
+      this.hasOne(models.show,{
+        foreignKey: 'theaterId',
+        onDelete: 'CASCADE'
+      })
+      
     }
   }
   theatre.init({

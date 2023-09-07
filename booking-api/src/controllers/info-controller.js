@@ -7,7 +7,7 @@ router.get("/",(req,res)=>{
    
     try {
         SuccessResponse.Data="Inside Info Controller,Api is working"
-        res.json({
+        returnres.json({
             SuccessResponse
         })
         
