@@ -94,6 +94,16 @@ async function findAllSort(query){
         throw error
     }
 }
+async function updateSeat(requiredSeats,id){
+    const show = new ShowRepository()
+    try {
+        const response= await show.updateSeats(requiredSeats,id)
+        return response 
+    } catch (error) {
+        throw error
+    }
+    
+}
 
 
-module.exports={showService:{create,update,remove,find,findAll,findAllSort}}
+module.exports={showService:{create,update,remove,find,findAll,findAllSort,updateSeat}}

@@ -55,6 +55,24 @@ async function showUpdate(req,res){
         throw error
     }
 }
+async function seatUpdate(req,res){
+    try {
+        seats=parseInt(req.params.seats)
+        const response= await ShowService.showService.updateSeat(availableSeats=seats,id=req.body.id)
+        SuccessResponse.Data=response
+        SuccessResponse.Message="succesfully updated"
+        return res.json(SuccessResponse)
+        
+    } catch (error) {
+        res.json({
+            status:"failed",
+            error:"",
+            comment:"failed to  update seats",
+            
+        })
+        throw error
+    }
+}
 async function showFindAll(req,res){
     try {
        
@@ -96,5 +114,5 @@ async function showFind(req,res){
 
 
 module.exports={
-    showController:{showCreate,showRemove,showUpdate,showFind,showFindAll}
+    showController:{showCreate,showRemove,showUpdate,showFind,showFindAll,seatUpdate}
 }

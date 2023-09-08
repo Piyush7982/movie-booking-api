@@ -4,7 +4,7 @@ const {TheatreService}= require("../services")
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
 async function theatreCreate(req,res){
     try {
-        
+      
         const response= await TheatreService.theatreService.create({theatreName:req.body.theatreName,cityId:req.body.cityId,totalSeat:req.body.totalSeat})
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully created"
