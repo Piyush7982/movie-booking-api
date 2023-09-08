@@ -57,7 +57,6 @@ async function showUpdate(req,res){
 }
 async function showFindAll(req,res){
     try {
-        console.log(req.query)
        
         const response=(req.query)?await ShowService.showService.findAllSort(req.query):await ShowService.showService.findAll()
         SuccessResponse.Data=response

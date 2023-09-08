@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     theatreName: {
       allowNull:false,
       type:DataTypes.STRING
+      // ,get() {
+      //   const rawValue = this.getDataValue('theatreName');
+      //   return rawValue ? rawValue.toUpperCase() : null;
+      // }
     },
     cityId:{
       allowNull:false,

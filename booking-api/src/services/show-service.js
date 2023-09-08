@@ -1,5 +1,6 @@
 const {ShowRepository}= require("../repository")
 const {theatre}= require("../models")
+const { Op } = require('sequelize');
 async function create(data){
     const show = new ShowRepository()
     try {
@@ -56,14 +57,38 @@ async function findAll(){
     }
 }
 async function findAllSort(query){
-    let filter={}
-    
+    let filter={show:{},movie:{},theatre:{},city:{}}
+    let order=[]
+    //Filters=?city=name,?theatre=name,?movie=name,?lang=lang
+    //sort=?price_DESC,?price_ASC
     if(query.price){
-        filter.costEach=query.price
+        [minPrice, maxPrice] = query.price.split("-");
+        filter.show.costEach={[Op.between]:[minPrice, ((maxPrice == undefined) ? 5000: maxPrice)]}
+        
+    }
+    if(query.city){
+        filter.city.cityName=query.city
+    }
+    if(query.theatre){
+        filter.theatre.theatreName=query.theatre
+    }
+    if(query.movie){
+        filter.movie.movieName=query.movie
+    }
+    if(query.lang){
+        filter.movie.language=query.lang
+    }
+    if(query.sort) {
+        order = [query.sort.split('_')];
+        if(order[0][0]=='price'){
+            order[0][0]="costEach"
+        }
+        console.log(order[0][0])
+      
     }
     const show = new ShowRepository()
     try {
-        const response= await show.findFiltered(filter)
+        const response= await show.findFiltered(filter,order)
         return response
     } catch (error) {
         throw error
