@@ -94,10 +94,10 @@ async function findAllSort(query){
         throw error
     }
 }
-async function updateSeat(requiredSeats,id){
+async function updateSeat(requiredSeats,id,inc){
     const show = new ShowRepository()
     try {
-        const response= await show.updateSeats(requiredSeats,id)
+        const response= await show.updateSeats(requiredSeats,id,inc)
         return response 
     } catch (error) {
         throw error

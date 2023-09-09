@@ -58,7 +58,7 @@ async function showUpdate(req,res){
 async function seatUpdate(req,res){
     try {
         seats=parseInt(req.params.seats)
-        const response= await ShowService.showService.updateSeat(availableSeats=seats,id=req.body.id)
+        const response= await ShowService.showService.updateSeat(availableSeats=seats,id=req.body.id,inc=req.body.inc)
         SuccessResponse.Data=response
         SuccessResponse.Message="succesfully updated"
         return res.json(SuccessResponse)
