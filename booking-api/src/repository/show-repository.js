@@ -15,7 +15,11 @@ class showRepository extends crud{
             const response= await show.findAll({include:[{model:movie,require:true,attributes:attribute},{model:theatre,require:true,attributes:attribute,include:[{model:city,attributes:attribute}]}]})
             return response
         } catch (error) {
-            throw new customError(error.message,400)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation,StatusCodes.BAD_REQUEST)
         }
     }
     
@@ -24,7 +28,11 @@ class showRepository extends crud{
             const response= await show.findAll({where:filter.show,order:sort,attributes:attribute,include:[{model:movie,require:true,attributes:attribute,where:filter.movie},{model:theatre,require:true,where:filter.theatre,attributes:attribute,include:[{model:city,attributes:attribute,where:filter.city}]}]})
             return response
         } catch (error) {
-            throw new customError(error.message,400)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation,StatusCodes.BAD_REQUEST)
         }
     }
     
@@ -44,7 +52,11 @@ class showRepository extends crud{
                 return finalResponse
             } catch (error) {
                 await transaction.rollback()
-                throw new customError(error.name,StatusCodes.BAD_REQUEST)
+                let explanation = [];
+                error.errors.forEach((err) => {
+                    explanation.push(err.message);
+                });
+                throw new customError(explanation,StatusCodes.BAD_REQUEST)
             }
         }else{
             try {
@@ -57,7 +69,11 @@ class showRepository extends crud{
                 return finalResponse
             } catch (error) {
                 await transaction.rollback()
-                throw new customError(error.name,StatusCodes.BAD_REQUEST)
+                let explanation = [];
+                error.errors.forEach((err) => {
+                    explanation.push(err.message);
+                });
+                throw new customError(explanation,StatusCodes.BAD_REQUEST)
             }
         }
         

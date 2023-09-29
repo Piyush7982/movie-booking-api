@@ -11,7 +11,11 @@ class crud{
            
             return response
         } catch (error) {
-           throw new customError(error.message,StatusCodes.NOT_IMPLEMENTED)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+           throw new customError(explanation,StatusCodes.BAD_REQUEST)
             
         }
         
@@ -21,7 +25,11 @@ class crud{
             const response= await this.model.destroy({where:{data}})
             return response
         } catch (error) {
-            throw new customError(error.message,StatusCodes.NOT_IMPLEMENTED)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation,StatusCodes.BAD_REQUEST)
         }
     }
     async update(newData,searchData){
@@ -29,7 +37,11 @@ class crud{
             const response= await this.model.update(newData, {where: searchData})
             return response
         } catch (error) {
-            throw new customError(error.message,StatusCodes.NOT_MODIFIED)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation,StatusCodes.BAD_REQUEST)
         }
     }
     async findAll(){
@@ -37,7 +49,11 @@ class crud{
             const response= await this.model.findAll()
             return response
         } catch (error) {
-            throw new customError(error.message,StatusCodes.NOT_FOUND)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation,StatusCodes.BAD_REQUEST)
         }
     }
     async find(id){
@@ -45,7 +61,11 @@ class crud{
             const response= await this.model.findByPk(id)
             return response
         } catch (error) {
-            throw new customError(error.message,StatusCodes.NOT_FOUND)
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation,StatusCodes.BAD_REQUEST)
         }
     }
 

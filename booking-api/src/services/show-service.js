@@ -83,7 +83,7 @@ async function findAllSort(query){
         if(order[0][0]=='price'){
             order[0][0]="costEach"
         }
-        console.log(order[0][0])
+       
       
     }
     const show = new ShowRepository()

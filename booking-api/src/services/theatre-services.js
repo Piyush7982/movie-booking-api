@@ -42,8 +42,6 @@ async function find(id){
 async function findAll(){
     const theatre = new TheatreRepository()
     try {
-        
-    
         const response= await theatre.getComplete()
         return response
     } catch (error) {

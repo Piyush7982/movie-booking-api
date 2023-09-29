@@ -1,6 +1,7 @@
 const { INTEGER } = require("sequelize")
 const {CityService}= require("../services")
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
+const { StatusCodes } = require("http-status-codes")
 
 async function cityCreate(req,res){
     try {
@@ -10,13 +11,11 @@ async function cityCreate(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  create city",
-            
-        })
         throw error
     }
 }
@@ -28,12 +27,10 @@ async function cityRemove(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  delete city",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -46,12 +43,10 @@ async function cityUpdate(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  update city",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -63,12 +58,10 @@ async function cityFindAll(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  find all cities",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -83,12 +76,10 @@ async function cityFind(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  find  city",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }

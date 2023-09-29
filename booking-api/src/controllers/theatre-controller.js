@@ -11,12 +11,10 @@ async function theatreCreate(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  create theatre",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -28,12 +26,10 @@ async function theatreRemove(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  delete theatre",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -46,12 +42,10 @@ async function theatreUpdate(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  update theatre",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -63,12 +57,10 @@ async function theatreFindAll(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  find all theatres",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -83,12 +75,10 @@ async function theatreFind(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  find  theatre",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }

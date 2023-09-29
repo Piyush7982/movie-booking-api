@@ -11,12 +11,10 @@ async function showCreate(req,res){
         
     } catch (error) {
         
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  create show",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -28,12 +26,10 @@ async function showRemove(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  delete show",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -46,12 +42,10 @@ async function showUpdate(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  update show",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -64,12 +58,10 @@ async function seatUpdate(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  update seats",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -82,12 +74,10 @@ async function showFindAll(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  find all show",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
@@ -102,12 +92,10 @@ async function showFind(req,res){
         return res.json(SuccessResponse)
         
     } catch (error) {
-        res.json({
-            status:"failed",
-            error:"",
-            comment:"failed to  find  show",
-            
-        })
+        ErrorResponse.Error=error
+        res
+        .status(error.statusCode)
+        .json(ErrorResponse)
         throw error
     }
 }
