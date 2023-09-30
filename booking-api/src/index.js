@@ -1,6 +1,8 @@
 const express= require("express")
 const {router}= require("./routes")
 const app= express()
+const {ServerPort}= require("./config")
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -11,8 +13,8 @@ app.get("/",(req,res)=>{
 app.use("/api",router)
 
 
-app.listen(5000,()=>{
-    console.log("server started")
+app.listen(ServerPort,()=>{
+    console.log(`Server Started on Port ${ServerPort}`)
 })
 
 
