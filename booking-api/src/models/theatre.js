@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class theatre extends Model {
@@ -11,35 +9,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.city,
-        {foreignKey:'cityId'})
-      this.hasOne(models.show,{
-        foreignKey: 'theaterId',
-        onDelete: 'CASCADE'
-      })
-      
+      this.belongsTo(models.city, { foreignKey: "cityId" });
+      this.hasOne(models.show, {
+        foreignKey: "theaterId",
+        onDelete: "CASCADE",
+      });
     }
   }
-  theatre.init({
-    theatreName: {
-      allowNull:false,
-      type:DataTypes.STRING
-      // ,get() {
-      //   const rawValue = this.getDataValue('theatreName');
-      //   return rawValue ? rawValue.toUpperCase() : null;
-      // }
+  theatre.init(
+    {
+      theatreName: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        // ,get() {
+        //   const rawValue = this.getDataValue('theatreName');
+        //   return rawValue ? rawValue.toUpperCase() : null;
+        // }
+      },
+      cityId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      totalSeat: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
     },
-    cityId:{
-      allowNull:false,
-      type:DataTypes.INTEGER
-    },
-    totalSeat: {
-      allowNull:false,
-      type:DataTypes.INTEGER
+    {
+      sequelize,
+      modelName: "theatre",
     }
-  }, {
-    sequelize,
-    modelName: 'theatre',
-  });
+  );
   return theatre;
 };

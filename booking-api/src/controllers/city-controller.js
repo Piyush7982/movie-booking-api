@@ -13,7 +13,7 @@ async function cityCreate(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         
         throw error
@@ -29,7 +29,7 @@ async function cityRemove(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -45,7 +45,7 @@ async function cityUpdate(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -60,7 +60,7 @@ async function cityFindAll(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -78,7 +78,7 @@ async function cityFind(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }

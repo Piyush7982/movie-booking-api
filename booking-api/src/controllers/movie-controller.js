@@ -1,6 +1,7 @@
 const { INTEGER } = require("sequelize")
 const {MovieService}= require("../services")
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
+const { StatusCodes } = require("http-status-codes")
 
 async function movieCreate(req,res){
     try {
@@ -13,7 +14,7 @@ async function movieCreate(req,res){
         
        ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -28,7 +29,7 @@ async function movieRemove(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -44,7 +45,7 @@ async function movieUpdate(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -59,7 +60,7 @@ async function movieFindAll(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -77,7 +78,7 @@ async function movieFind(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }

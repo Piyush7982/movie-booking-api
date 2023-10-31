@@ -1,73 +1,76 @@
-const customError= require("../utils/errors") 
-const {StatusCodes}= require("http-status-codes")
+const customError = require("../utils/errors")
+const { StatusCodes } = require("http-status-codes")
 
-class crud{
-    constructor(model){
-        this.model=model
+class crud {
+    constructor(model) {
+        this.model = model
     }
-    async create(data){
+    async create(data) {
         try {
-            const response= await this.model.create(data)
-           
+            const response = await this.model.create(data)
+
             return response
         } catch (error) {
             let explanation = [];
             error.errors.forEach((err) => {
                 explanation.push(err.message);
             });
-           throw new customError(explanation,StatusCodes.BAD_REQUEST)
-            
+            throw new customError(explanation, StatusCodes.BAD_REQUEST)
+
         }
-        
+
     }
-    async remove(data){
+    async remove(data) {
         try {
-            const response= await this.model.destroy({where:{data}})
+            const response = await this.model.destroy({ where: data })
             return response
         } catch (error) {
             let explanation = [];
             error.errors.forEach((err) => {
                 explanation.push(err.message);
             });
-            throw new customError(explanation,StatusCodes.BAD_REQUEST)
-        }
-    }
-    async update(newData,searchData){
-        try {
-            const response= await this.model.update(newData, {where: searchData})
-            return response
-        } catch (error) {
-            let explanation = [];
-            error.errors.forEach((err) => {
-                explanation.push(err.message);
-            });
-            throw new customError(explanation,StatusCodes.BAD_REQUEST)
+            throw new customError(explanation, StatusCodes.BAD_REQUEST)
+
         }
     }
-    async findAll(){
+    async update(newData, searchData) {
         try {
-            const response= await this.model.findAll()
+            const response = await this.model.update(newData, { where: searchData })
             return response
         } catch (error) {
             let explanation = [];
             error.errors.forEach((err) => {
                 explanation.push(err.message);
             });
-            throw new customError(explanation,StatusCodes.BAD_REQUEST)
+            throw new customError(explanation, StatusCodes.BAD_REQUEST)
         }
     }
-    async find(id){
+    async findAll() {
         try {
-            const response= await this.model.findByPk(id)
+
+            const response = await this.model.findAll()
+
             return response
         } catch (error) {
             let explanation = [];
             error.errors.forEach((err) => {
                 explanation.push(err.message);
             });
-            throw new customError(explanation,StatusCodes.BAD_REQUEST)
+            throw new customError(explanation, StatusCodes.BAD_REQUEST)
+        }
+    }
+    async find(id) {
+        try {
+            const response = await this.model.findByPk(id)
+            return response
+        } catch (error) {
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new customError(explanation, StatusCodes.BAD_REQUEST)
         }
     }
 
 }
-module.exports={crud}
+module.exports = { crud }

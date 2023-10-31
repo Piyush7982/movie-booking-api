@@ -1,6 +1,6 @@
 const { INTEGER } = require("sequelize")
 const {TheatreService}= require("../services")
-
+const {StatusCodes}= require("http-status-codes")
 const {SuccessResponse,ErrorResponse}= require("../utils/common")
 async function theatreCreate(req,res){
     try {
@@ -13,7 +13,7 @@ async function theatreCreate(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -28,7 +28,7 @@ async function theatreRemove(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -44,7 +44,7 @@ async function theatreUpdate(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -59,7 +59,7 @@ async function theatreFindAll(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
@@ -77,7 +77,7 @@ async function theatreFind(req,res){
     } catch (error) {
         ErrorResponse.Error=error
         res
-        .status(error.statusCode)
+        .status((error.statusCode)?error.statusCode:StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ErrorResponse)
         throw error
     }
